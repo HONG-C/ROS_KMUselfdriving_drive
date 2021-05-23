@@ -37,12 +37,12 @@ def go_straight(P_VAL):
 
 #우회전을 위한 함수 
 def turn_right():
-	angle = 80
+	angle = 45
 	xycar_msg.data = [angle, 40]
 
 #좌회전을 위한 함수 
 def turn_left():
-	angle = -80
+	angle = -45
 	xycar_msg.data = [angle, 40]
 
 rospy.init_node('guide')
@@ -54,15 +54,14 @@ xycar_msg = Int32MultiArray()
 
 while not rospy.is_shutdown():
 		P_VAL=2*(R-L)#차량 좌우 거리 확인 
-		if FM>250:
-			go_straight(P_VAL)
-		elif FL<FR&FR>100:
+
+		if FL<FR&FR>300:
 			turn_right()
-		elif FL>100:
+		elif FL>FR&FL>300:
 			turn_left()
 		else:
-			angle=0
-			xycar_msg.data = [angle, 40]
+			go_straight(P_VAL)
+
 
 
 		motor_pub.publish(xycar_msg)

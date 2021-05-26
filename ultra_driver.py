@@ -32,18 +32,18 @@ def callback(msg):
 #직선 주행 시 자세제어를 위한 함수 
 def go_straight(P_VAL):
 	angle = 0+P_VAL+(FR-FL)
-	xycar_msg.data = [angle, 40]
+	xycar_msg.data = [angle, 100]
 	
 
 #우회전을 위한 함수 
 def turn_right():
 	angle = 45
-	xycar_msg.data = [angle, 40]
+	xycar_msg.data = [angle, 100]
 
 #좌회전을 위한 함수 
 def turn_left():
 	angle = -45
-	xycar_msg.data = [angle, 40]
+	xycar_msg.data = [angle, 100]
 
 rospy.init_node('guide')
 motor_pub = rospy.Publisher('xycar_motor_msg', Int32MultiArray, queue_size=1)
